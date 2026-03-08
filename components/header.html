@@ -1,9 +1,23 @@
 <template bay="ssc-header">
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="events.html">Events</a></li>
+  <nav id="main-nav">
+    <ul class="nav-links">
+      <li><a class="nav-link" href="#home">Home</a></li>
+      <li><a class="nav-link" href="#events">Events</a></li>
+      <li><a class="nav-link" href="#contact">Contact</a></li>
     </ul>
   </nav>
 </template>
+
+<style>
+  .nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+  }
+
+  .nav-link {
+    text-decoration: none;
+    margin-right: 5rem;
+    font-size: 1.2rem;
+  }
+</style>

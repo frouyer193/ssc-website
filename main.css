@@ -1,0 +1,45 @@
+:root {
+  --scroll-padding-top: 6vh;
+}
+
+html {
+  scroll-padding-top: 6vh;
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+main {
+  flex: 1;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  background-color: red;
+  z-index: 1000;
+  display: grid;
+}
+
+.content {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+  background-color: green;
+  cursor: grab;
+}
+
+.section {
+  display: block;
+  height: 94vh;
+  background-color: blue;
+}
+
+.section.last {
+ height: 88vh;
+ background-color: blueviolet;
+}
