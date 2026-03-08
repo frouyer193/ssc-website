@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sydney SUP Club</title>
+    <script type="module" src="main.js" defer></script>
+  </head>
+  <body>
+    <ssc-header></ssc-header>
+    <ssc-content></ssc-content>
+    <ssc-footer bay="components/footer.component.html"></ssc-footer>
+
+<template bay="ssc-content">
+    <router this="/">
+      <div>
+        <ssc-home bay="home.html"></ssc-home>
+      </div>
+    </router>
+    
+    <router this="/contact">
+      <div>
+        <ssc-contact bay="contact.html" message="contact form"></ssc-contact>
+      </div>
+    </router>
+
+        <router this="/about">
+      <div>
+        <ssc-about bay="about.html"></ssc-about>
+      </div>
+    </router>
+</template>
+
+<template bay="ssc-header">
+<nav>
+  <ul>
+    <li><route href="/">Home</route></li>
+    <li><route href="contact">Contact</route></li>
+        <li><route href="about">About us</route></li>
+  </ul>
+</nav>
+</template>
+
+  </body>
+</html>
