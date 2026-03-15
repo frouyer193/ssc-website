@@ -1,3 +1,8 @@
-import bay from "//cdn.jsdelivr.net/npm/@dunks1980/bay.js/bay.min.mjs";
-bay();
+// Protect social media links from bots
+document.querySelectorAll('[data-link]').forEach(link => {
+  link.href = atob(link.getAttribute('data-link'));
+});
+
+
+
 
