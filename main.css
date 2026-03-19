@@ -186,7 +186,6 @@ footer {
   border: 2px solid var(--ssc-light-blue);
   border-radius: 8px;
   padding: 8px;
-  background-color: white;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
