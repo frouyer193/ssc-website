@@ -66,6 +66,9 @@ header {
   z-index: 1000;
   display: grid;
   background-color: var(--ssc-light-blue);
+  opacity: 0.8;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
 
   .nav-link {
     font-weight: bold;
@@ -101,11 +104,9 @@ header {
 
 .section.last {
   min-height: unset;
-  height: 80vh;
 }
 
 footer {
-  height: 20vh;
   background-color: var(--ssc-light-blue);
   padding: 2rem;
   text-align: center;
@@ -163,12 +164,38 @@ footer {
   color: var(--ssc-light-blue);
   text-decoration: none;
   transition: color 0.3s ease;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .external-link:hover {
   color: var(--ssc-blue);
 }
 
+/* ==================== QR CODE STYLES ==================== */
+
+.qr-code-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.qr-code {
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+  border: 2px solid var(--ssc-light-blue);
+  border-radius: 8px;
+  padding: 8px;
+  background-color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.qr-code:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 118, 165, 0.3);
+}
 
 /* Override link colors for footer (light blue background) */
 footer a {
