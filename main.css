@@ -30,6 +30,7 @@
 
 :root {
   --scroll-padding-top: 6vh;
+  --transition-duration: 0.3s;
   --ssc-dark-blue: #184867;
   --ssc-blue: #0076a5;
   --ssc-light-blue: #63a8d0;
@@ -64,11 +65,14 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: var(--ssc-light-blue);
-  opacity: 0.8;
+  opacity: 0.95;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
   border-radius: 10px;
+  padding: 0 1rem;
 
   .nav-link {
     font-weight: bold;
@@ -79,6 +83,57 @@ header {
     border-bottom: var(--ssc-blue) 2px solid;
   }
 }
+
+/* Remove bottom border radius when menu is active on mobile */
+header:has(#main-nav.active) {
+  border-radius: 10px 10px 0 0;
+}
+
+/* ==================== HAMBURGER MENU ==================== */
+
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  gap: 4px;
+}
+
+.hamburger-menu span {
+  width: 25px;
+  height: 3px;
+  background-color: var(--ssc-dark-blue);
+  border-radius: 3px;
+  transition: all var(--transition-duration) ease;
+}
+
+.hamburger-menu.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ==================== HEADER LOGO ==================== */
+
+.header-logo {
+  display: none;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--ssc-dark-blue);
+  text-align: center;
+  flex: 1;
+  margin: .4em 0;
+}
+
+
 
 .content {
   width: 90%;
@@ -132,7 +187,7 @@ footer {
   color: white;
   font-size: 2rem;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color var(--transition-duration) ease;
 }
 
 .social-links a:hover {
@@ -163,7 +218,7 @@ footer {
 .external-link {
   color: var(--ssc-light-blue);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color var(--transition-duration) ease;
   font-size: 1.2rem;
   font-weight: bold;
 }
@@ -182,16 +237,17 @@ footer {
 }
 
 .qr-code {
+  width: 100%;
   max-width: 200px;
   border: 2px solid var(--ssc-light-blue);
   border-radius: 8px;
   padding: 8px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform var(--transition-duration) ease, box-shadow var(--transition-duration) ease;
 }
 
 .qr-code:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 118, 165, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 118, 165, 0.2);
 }
 
 /* Override link colors for footer (light blue background) */
@@ -224,22 +280,66 @@ p {
   line-height: 1.6;
 }
 
+/* Mobile & Tablet: Shared mobile menu styles (up to 768px) */
+@media (max-width: 768px) {
+  .hamburger-menu {
+    display: flex;
+  }
+
+  .header-logo {
+    display: block;
+  }
+
+  #main-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--ssc-light-blue);
+    width: 100%;
+    border-radius: 0 0 10px 10px;
+    padding: 1rem 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height var(--transition-duration) ease, opacity var(--transition-duration) ease;
+  }
+
+  #main-nav.active {
+    max-height: 500px;
+    opacity: 1;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-link {
+    margin-right: 0;
+    padding: 0.75rem 1.5rem;
+    display: block;
+  }
+}
+
 /* Mobile: Small screens (up to 480px) */
 @media (max-width: 480px) {
   html {
-    font-size: 12px;
+    font-size: 20px !important;
   }
 
   h1 {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
   }
 
   h2 {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 
   h3 {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 
   .section-title {
@@ -248,7 +348,6 @@ p {
 
   .nav-link {
     font-size: 0.9rem;
-    margin-right: 1.5rem;
   }
 
   .social-links a {
@@ -276,7 +375,7 @@ p {
 
   .nav-link {
     font-size: 1rem;
-    margin-right: 2rem;
+    padding: 0.75rem 2rem;
   }
 
   .social-links a {
@@ -292,5 +391,33 @@ p {
 
   .section-title {
     font-size: 2.5rem;
+  }
+
+  .hamburger-menu {
+    display: none;
+  }
+
+  .header-logo {
+    display: none;
+  }
+
+  #main-nav {
+    display: block !important;
+    position: static;
+    background-color: transparent;
+    width: auto;
+    border-radius: 0;
+    padding: 0;
+  }
+
+  .nav-links {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .nav-link {
+    margin-right: 5rem;
+    padding: 0;
+    display: inline;
   }
 }
