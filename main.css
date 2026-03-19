@@ -183,8 +183,6 @@ footer {
 
 .qr-code {
   max-width: 200px;
-  width: 100%;
-  height: auto;
   border: 2px solid var(--ssc-light-blue);
   border-radius: 8px;
   padding: 8px;
