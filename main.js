@@ -72,29 +72,40 @@ arrow.addEventListener('click', () => {
     const currentIndex = sections.indexOf(active.dataset.section);
     const nextIndex = currentIndex + 1;
     if (nextIndex < sections.length) {
-      document.getElementById(sections[nextIndex]).scrollIntoView({ behavior: 'smooth' });
+      const nextSection = sections[nextIndex];
+      setActiveIndicator(nextSection);
+      document.getElementById(nextSection).scrollIntoView({ behavior: 'smooth' });
     }
   }
 });
 sectionMap.appendChild(arrow);
 
-// Update active indicator on scroll
+function setActiveIndicator(sectionId) {
+  document.querySelectorAll('.section-indicator').forEach(ind => ind.classList.toggle('active', ind.dataset.section === sectionId));
+}
+
 function updateActiveIndicator() {
-  const scrollY = window.scrollY;
-  const windowHeight = window.innerHeight;
+  const windowMiddle = window.innerHeight / 2;
+  let closestSection = null;
+  let closestDistance = Number.POSITIVE_INFINITY;
 
-  sections.forEach((id, index) => {
+  sections.forEach(id => {
     const section = document.getElementById(id);
+    if (!section) return;
     const rect = section.getBoundingClientRect();
-    const sectionTop = rect.top + scrollY;
-    const sectionBottom = sectionTop + rect.height;
-
-    if (scrollY >= sectionTop - windowHeight / 2 && scrollY < sectionBottom - windowHeight / 2) {
-      document.querySelectorAll('.section-indicator').forEach(ind => ind.classList.remove('active'));
-      document.querySelector(`.section-indicator[data-section="${id}"]`).classList.add('active');
+    const sectionMiddle = rect.top + rect.height / 2;
+    const distance = Math.abs(sectionMiddle - windowMiddle);
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestSection = id;
     }
   });
+
+  if (closestSection) {
+    setActiveIndicator(closestSection);
+  }
 }
 
 window.addEventListener('scroll', updateActiveIndicator);
+window.addEventListener('resize', updateActiveIndicator);
 updateActiveIndicator(); // Initial call
